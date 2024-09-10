@@ -1,12 +1,17 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {SearchBar} from '../components/SearchBar';
-import {useAppSelector} from '../store/hooks';
+import {useBooks, useGetBooks} from '../modules/books/hooks';
 
 export const HomeScreen = () => {
   const [query, setQuery] = useState('');
-  const a = useAppSelector(state => state.booksReducer.books);
-  console.log(a);
+  const {getBooks, getBooksRqst} = useGetBooks(query);
+  const books = useBooks();
+  console.log(books, getBooksRqst.state);
+
+  useEffect(() => {
+    getBooks();
+  }, [getBooks, query]);
 
   return (
     <View style={styles.container}>

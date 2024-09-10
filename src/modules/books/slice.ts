@@ -1,11 +1,11 @@
 import {createSlice} from '@reduxjs/toolkit';
 import {getBooksThunk} from './thunks';
 import {InitialState} from './types';
+import {failure, idle, loading, success} from '../../store/redux-utils';
 
 export const initialState: InitialState = {
-  books: [],
-  isLoading: false,
-  error: undefined || '',
+  books: undefined,
+  getBooksRqst: idle(),
 };
 
 export const booksSlice = createSlice({
@@ -15,15 +15,14 @@ export const booksSlice = createSlice({
   extraReducers: builder => {
     builder
       .addCase(getBooksThunk.pending, state => {
-        state.isLoading = true;
+        state.getBooksRqst = loading(state.getBooksRqst);
       })
       .addCase(getBooksThunk.rejected, (state, action) => {
-        state.error = action.payload;
-        state.isLoading = false;
+        state.getBooksRqst = failure(state.getBooksRqst, action.payload);
       })
       .addCase(getBooksThunk.fulfilled, (state, action) => {
+        state.getBooksRqst = success();
         state.books = action.payload;
-        state.isLoading = false;
       });
   },
 });
