@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useRef, useState} from 'react';
 import {Pressable, StyleSheet, Text, TextInput, View} from 'react-native';
 
 interface ISearchBar {
@@ -7,16 +7,31 @@ interface ISearchBar {
 }
 
 export const SearchBar = (props: ISearchBar) => {
-  const {value, setValue} = props;
+  const [localValue, setLocalValue] = useState('');
+  const {setValue} = props;
+  const inputRef = useRef<TextInput>(null);
+  const search = () => {
+    setValue(localValue);
+
+    if (inputRef.current) {
+      inputRef.current.blur();
+    }
+  };
   return (
     <View style={styles.container}>
       <TextInput
-        value={value}
-        onChangeText={setValue}
+        blurOnSubmit
+        onSubmitEditing={search}
+        ref={inputRef}
+        autoFocus
+        selectTextOnFocus
+        value={localValue}
+        onChangeText={setLocalValue}
         style={styles.input}
         placeholder="search books"
-        placeholderTextColor={'#001B2E'}></TextInput>
-      <Pressable style={styles.btn}>
+        placeholderTextColor={'#001B2E'}
+      />
+      <Pressable style={styles.btn} onPress={search}>
         <Text style={styles.txt}>search</Text>
       </Pressable>
     </View>
@@ -26,8 +41,9 @@ export const SearchBar = (props: ISearchBar) => {
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    padding: 15,
-    gap: 20,
+    paddingVertical: 15,
+    gap: 10,
+    marginHorizontal: 30,
   },
   input: {
     flex: 1,
@@ -36,8 +52,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#ADB6C4',
     padding: 15,
     fontSize: 15,
-    color: '#fff',
-    marginLeft: 30,
+    color: '#001B2E',
     margin: 5,
     borderRadius: 15,
   },
@@ -52,7 +67,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   txt: {
-    color: '#001B2E',
+    color: '#000',
     fontSize: 15,
     fontWeight: '600',
     textTransform: 'capitalize',

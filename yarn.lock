@@ -6870,9 +6870,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"macosBookManager@workspace:.":
+"macos_book_manager@workspace:.":
   version: 0.0.0-use.local
-  resolution: "macosBookManager@workspace:."
+  resolution: "macos_book_manager@workspace:."
   dependencies:
     "@babel/core": "npm:^7.12.9"
     "@babel/preset-env": "npm:^7.14.0"
