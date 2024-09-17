@@ -4,18 +4,17 @@ import {Book} from '../modules/books/types';
 
 interface IBookItem {
   book: Book;
-  key: string;
 }
 
 export const BookItem = (props: IBookItem) => {
   const {book} = props;
 
-  return (
+  return book.volumeInfo?.title ? (
     <View style={styles.container}>
       <Image
         source={{
           uri:
-            book.volumeInfo?.imagelinks?.smallThumbnail ||
+            `https://books.google.com/books/publisher/content/images/frontcover/${book.id}?fife=w400-h600&source=gbs_api` ||
             'https://images.unsplash.com/photo-1601073283537-f246319362b3?q=80&w=3024&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
         }}
         style={styles.image}
@@ -39,7 +38,7 @@ export const BookItem = (props: IBookItem) => {
         ) : null}
       </View>
     </View>
-  );
+  ) : null;
 };
 
 const styles = StyleSheet.create({
@@ -53,7 +52,8 @@ const styles = StyleSheet.create({
   },
   image: {
     width: 300,
-    height: 300,
+    height: undefined,
+    aspectRatio: 1,
   },
   info: {
     padding: 10,

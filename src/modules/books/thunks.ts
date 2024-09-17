@@ -5,7 +5,7 @@ import axios from 'axios';
 export const searchBooks = async (query: string): Promise<Book[]> => {
   const q = query;
   const fields =
-    'items(id, volumeInfo(title, authors, averageRating, description, imageLinks(smallThumbnail), pageCount, publishedDate)), totalItems';
+    'items(id, selfLink, volumeInfo(title, authors, averageRating, description, imageLinks(thumbnail, smallThumbnail, small ), pageCount, publishedDate)), totalItems';
   const response = await axios.get(
     'https://www.googleapis.com/books/v1/volumes',
     {
@@ -16,7 +16,9 @@ export const searchBooks = async (query: string): Promise<Book[]> => {
       },
     },
   );
+
   const data: Book[] = response.data.items;
+  console.log(data.map(book => book.volumeInfo?.imageLinks?.thumbnail));
   data.map(obj => JSON.stringify(obj.volumeInfo?.authors));
   //console.log(JSON.stringify(response.data));
 

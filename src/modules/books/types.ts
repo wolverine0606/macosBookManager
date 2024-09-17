@@ -3,6 +3,8 @@ import {RequestSliceState} from '../../store/types';
 export type InitialState = {
   books: Book[] | undefined;
   getBooksRqst: RequestSliceState;
+  booksRequested: boolean;
+  query: string | undefined;
 };
 
 export interface Book {
@@ -12,7 +14,7 @@ export interface Book {
     authors?: string[];
     averageRating?: number;
     description?: string;
-    imagelinks?: {
+    imageLinks?: {
       thumbnail: string;
     };
     pageCount?: number;

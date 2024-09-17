@@ -1,14 +1,16 @@
 import React, {useRef, useState} from 'react';
 import {Pressable, StyleSheet, Text, TextInput, View} from 'react-native';
+import {useGetBooks} from '../modules/books/hooks';
 
 interface ISearchBar {
   value: string;
   setValue: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export const SearchBar = (props: ISearchBar) => {
+export const SearchBar = () => {
+  const {setQuery} = useGetBooks();
   const [localValue, setLocalValue] = useState('');
-  const {setValue} = props;
+  const setValue = setQuery;
   const inputRef = useRef<TextInput>(null);
   const search = () => {
     setValue(localValue);

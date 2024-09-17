@@ -6,12 +6,21 @@ import {failure, idle, loading, success} from '../../store/redux-utils';
 export const initialState: InitialState = {
   books: undefined,
   getBooksRqst: idle(),
+  booksRequested: false,
+  query: '',
 };
 
 export const booksSlice = createSlice({
   name: 'books',
   initialState,
-  reducers: {},
+  reducers: {
+    firstRequest: state => {
+      state.booksRequested = true;
+    },
+    setValue: (state, action) => {
+      state.query = action.payload;
+    },
+  },
   extraReducers: builder => {
     builder
       .addCase(getBooksThunk.pending, state => {
@@ -26,5 +35,6 @@ export const booksSlice = createSlice({
       });
   },
 });
+export const {firstRequest, setValue} = booksSlice.actions;
 
 export default booksSlice.reducer;
