@@ -18,9 +18,6 @@ export const searchBooks = async (query: string): Promise<Book[]> => {
   );
 
   const data: Book[] = response.data.items;
-  console.log(data.map(book => book.volumeInfo?.imageLinks?.thumbnail));
-  data.map(obj => JSON.stringify(obj.volumeInfo?.authors));
-  //console.log(JSON.stringify(response.data));
 
   return data;
 };

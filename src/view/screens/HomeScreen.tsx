@@ -1,32 +1,26 @@
-import React, {useEffect, useState} from 'react';
-import {FlatList, ScrollView, StyleSheet, Text, View} from 'react-native';
+import React, {useEffect} from 'react';
+import {FlatList, Text, View} from 'react-native';
 import {SearchBar} from '../components/SearchBar';
 import {useBooks, useGetBooks} from '../modules/books/hooks';
-import {Book} from '../modules/books/types';
 import {BookItem} from '../components/BookItem';
+import {useAppTheme} from '../theme';
 
 export const HomeScreen = () => {
   const {getBooks, firstBooksRqst, getQuery} = useGetBooks();
   const query = getQuery();
   const books = useBooks();
+  const {colors, fontSize} = useAppTheme();
+
   useEffect(() => {
     if (query) {
       getBooks(query);
     }
-    console.log(firstBooksRqst);
   }, [getBooks, query, firstBooksRqst]);
 
   return (
-    <View style={styles.container}>
+    <View style={{flex: 1, backgroundColor: colors.mainBackground}}>
       <SearchBar />
       {firstBooksRqst ? (
-        // <ScrollView>
-        //   {books && books.length > 0 ? (
-        //     books.map((book: Book) => <BookItem book={book} key={book.id} />)
-        //   ) : (
-        //     <Text style={{paddingHorizontal: 30}}>No books available</Text>
-        //   )}
-        // </ScrollView>
         <FlatList
           data={books}
           renderItem={({item}) => <BookItem book={item} />}
@@ -39,16 +33,11 @@ export const HomeScreen = () => {
             alignSelf: 'center',
             alignItems: 'center',
           }}>
-          <Text style={{fontSize: 40}}>find your books</Text>
+          <Text style={{fontSize: fontSize.xxl, color: colors.lightText}}>
+            find your favorite books
+          </Text>
         </View>
       )}
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#292f36',
-  },
-});

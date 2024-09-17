@@ -6,17 +6,19 @@
  */
 
 import React from 'react';
-
-import {HomeScreen} from './screens/HomeScreen';
 import {Provider} from 'react-redux';
 import {store} from './store/store';
-import {searchBooks} from './modules/books/thunks';
+import {darkTheme} from './theme';
+import {ThemeProvider} from '@shopify/restyle';
+import {HomeScreen} from './screens/HomeScreen';
+import {Platform} from 'react-native';
 
 function App(): JSX.Element {
-  searchBooks('Harry potter');
   return (
     <Provider store={store}>
-      <HomeScreen />
+      <ThemeProvider theme={darkTheme}>
+        <HomeScreen />
+      </ThemeProvider>
     </Provider>
   );
 }
