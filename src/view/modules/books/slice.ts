@@ -1,18 +1,21 @@
-import {createSlice} from '@reduxjs/toolkit';
+import {createEntityAdapter, createSlice} from '@reduxjs/toolkit';
 import {getBooksThunk} from './thunks';
-import {InitialState} from './types';
+import {Book, InitialState} from './types';
 import {failure, idle, loading, success} from '../../store/redux-utils';
+import {RootState} from '../../store/types';
 
 export const initialState: InitialState = {
-  books: undefined,
   getBooksRqst: idle(),
   booksRequested: false,
   query: '',
 };
+const bookAdapter = createEntityAdapter<Book, string>({
+  selectId: (book: Book) => book.id,
+});
 
 export const booksSlice = createSlice({
   name: 'books',
-  initialState,
+  initialState: bookAdapter.getInitialState(initialState),
   reducers: {
     firstRequest: state => {
       state.booksRequested = true;
@@ -31,10 +34,14 @@ export const booksSlice = createSlice({
       })
       .addCase(getBooksThunk.fulfilled, (state, action) => {
         state.getBooksRqst = success();
-        state.books = action.payload;
+        bookAdapter.upsertMany(state, action.payload);
       });
   },
 });
+
 export const {firstRequest, setValue} = booksSlice.actions;
+export const bookSelector = bookAdapter.getSelectors(
+  (state: RootState) => state.booksReducer,
+);
 
 export default booksSlice.reducer;

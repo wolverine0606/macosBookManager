@@ -10,14 +10,16 @@ import {Provider} from 'react-redux';
 import {store} from './store/store';
 import {darkTheme} from './theme';
 import {ThemeProvider} from '@shopify/restyle';
-import {HomeScreen} from './screens/HomeScreen';
-import {Platform} from 'react-native';
+import {AppNavigator} from './navigation/App';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
 
 function App(): JSX.Element {
   return (
     <Provider store={store}>
       <ThemeProvider theme={darkTheme}>
-        <HomeScreen />
+        <SafeAreaProvider>
+          <AppNavigator />
+        </SafeAreaProvider>
       </ThemeProvider>
     </Provider>
   );

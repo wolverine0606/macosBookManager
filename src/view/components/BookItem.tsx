@@ -1,18 +1,23 @@
 import React from 'react';
-import {Image, StyleSheet, Text, View} from 'react-native';
+import {Image, Pressable, StyleSheet, Text, View} from 'react-native';
 import {Book} from '../modules/books/types';
 import {useAppTheme} from '../theme';
+import {useAppNavigation} from './useAppNavigation';
 
 interface IBookItem {
   book: Book;
 }
 
 export const BookItem = (props: IBookItem) => {
+  const nav = useAppNavigation();
   const {book} = props;
   const {styles} = useBookItemStyleSheet();
+  const bookPressed = () => {
+    nav.navigate('Book', {id: book.id});
+  };
 
   return book.volumeInfo?.title ? (
-    <View style={styles.container}>
+    <Pressable style={styles.container} onPress={bookPressed}>
       <Image
         source={{
           uri:
@@ -37,7 +42,7 @@ export const BookItem = (props: IBookItem) => {
           </Text>
         ) : null}
       </View>
-    </View>
+    </Pressable>
   ) : null;
 };
 

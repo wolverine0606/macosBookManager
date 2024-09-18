@@ -1,13 +1,12 @@
 import {RequestSliceState} from '../../store/types';
 
 export type InitialState = {
-  books: Book[] | undefined;
   getBooksRqst: RequestSliceState;
   booksRequested: boolean;
   query: string | undefined;
 };
 
-export interface Book {
+export type Book = {
   id: string;
   volumeInfo?: {
     title?: string;
@@ -18,5 +17,7 @@ export interface Book {
       thumbnail: string;
     };
     pageCount?: number;
+    publishedDate?: string;
+    infoLink?: string;
   };
-}
+};

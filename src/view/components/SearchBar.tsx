@@ -73,4 +73,4 @@ const useSearchBarStyleSheet = () => {
     },
   });
   return {styles};
-}; //
+};

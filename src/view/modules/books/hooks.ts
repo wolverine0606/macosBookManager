@@ -1,6 +1,7 @@
 import {useCallback, useEffect} from 'react';
 import {useAppDispatch, useAppSelector} from '../../store/hooks';
 import {
+  bookByTypeSelector,
   firstBooksSelector,
   getBooksRqstSelector,
   getBooksSelector,
@@ -41,6 +42,19 @@ export const useGetBooks = () => {
     },
     [d],
   );
+  const selectedBook = (id: string) =>
+    useAppSelector(state => bookByTypeSelector(state, id));
 
-  return {getBooks, getBooksRqst, firstBooksRqst, setQuery, getQuery};
+  return {
+    getBooks,
+    getBooksRqst,
+    firstBooksRqst,
+    setQuery,
+    getQuery,
+    selectedBook,
+  };
+};
+
+export const getBookById = (id: string) => {
+  return {};
 };
