@@ -1,10 +1,10 @@
-import {useRoute} from '@react-navigation/native';
-import {Image, StyleSheet, Text, View} from 'react-native';
+import {Link, useRoute} from '@react-navigation/native';
+import {Image, Pressable, StyleSheet, Text, View} from 'react-native';
 import {AppStackScreenProps} from '../navigation/types';
 import {useGetBooks} from '../modules/books/hooks';
 import {Screen} from 'react-native-screens';
 import {useAppTheme} from '../theme';
-import Icon from 'react-native-vector-icons/AntDesign';
+import {Linking} from 'react-native';
 
 export const BookScreen = () => {
   const info = useRoute<AppStackScreenProps<'Book'>['route']>();
@@ -23,27 +23,43 @@ export const BookScreen = () => {
           }}></Image>
         <View style={styles.textContainer}>
           <Text style={styles.title}>{book?.volumeInfo?.title}</Text>
+          {book?.volumeInfo?.pageCount ? (
+            <View>
+              <Text style={styles.text}>{book.volumeInfo.pageCount} pages</Text>
+            </View>
+          ) : null}
           {book?.volumeInfo?.averageRating ? (
             <View>
-              <Icon name="star"></Icon>
               <Text style={styles.text}>
-                Google Books rating: {book.volumeInfo?.averageRating}/5
+                Google Books rating: {book.volumeInfo.averageRating}/5
               </Text>
             </View>
           ) : null}
           {book?.volumeInfo?.categories ? (
-            <Text style={styles.text}>{book.volumeInfo?.categories}</Text>
+            <Text style={styles.text}>{book.volumeInfo.categories}</Text>
           ) : null}
           {book?.volumeInfo?.authors ? (
             <Text style={styles.text}>
-              {book.volumeInfo?.authors.join(', ')}
+              {book.volumeInfo.authors.join(', ')}
             </Text>
           ) : null}
-          {book?.volumeInfo?.description ? (
-            <Text style={styles.text}>{book.volumeInfo?.description}</Text>
+          {book?.volumeInfo?.infoLink ? (
+            <Pressable
+              style={({pressed}) => [
+                styles.button,
+                pressed ? styles.buttonPressed : null,
+              ]}
+              onPress={() => {
+                Linking.openURL(book.volumeInfo.infoLink);
+              }}>
+              <Text>buy book</Text>
+            </Pressable>
           ) : null}
         </View>
       </View>
+      {book?.volumeInfo?.description ? (
+        <Text style={styles.text}>{book.volumeInfo?.description}</Text>
+      ) : null}
     </Screen>
   );
 };
@@ -54,13 +70,12 @@ const useBookItemStyleSheet = () => {
     container: {
       flex: 1,
       backgroundColor: colors.mainBackground,
+      padding: spacing.l,
     },
     rawContainer: {
-      flex: 1,
-      padding: spacing.l,
+      //flex: 1,
       flexDirection: 'row',
-      borderColor: 'white',
-      borderWidth: 2,
+      paddingBottom: spacing.m,
       gap: spacing.m,
     },
     image: {
@@ -81,6 +96,16 @@ const useBookItemStyleSheet = () => {
       fontSize: fontSize.m,
       fontWeight: '500',
       color: colors.grayText,
+    },
+    button: {
+      alignSelf: 'flex-start',
+      paddingHorizontal: spacing.m,
+      paddingVertical: spacing.s,
+      backgroundColor: colors.borderColor,
+      borderRadius: borderRadii.xl,
+    },
+    buttonPressed: {
+      backgroundColor: colors.darkText,
     },
   });
   return {styles};

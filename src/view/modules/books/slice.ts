@@ -34,7 +34,7 @@ export const booksSlice = createSlice({
       })
       .addCase(getBooksThunk.fulfilled, (state, action) => {
         state.getBooksRqst = success();
-        bookAdapter.upsertMany(state, action.payload);
+        bookAdapter.setAll(state, action.payload);
       });
   },
 });
