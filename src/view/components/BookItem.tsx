@@ -60,7 +60,6 @@ const useBookItemStyleSheet = () => {
     },
     image: {
       width: 300,
-      height: undefined,
       aspectRatio: 2 / 3,
     },
     info: {

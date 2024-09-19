@@ -19,5 +19,8 @@ export type Book = {
     pageCount?: number;
     publishedDate?: string;
     infoLink?: string;
+    language?: string;
+    categories: string[];
+    publisher: string;
   };
 };
