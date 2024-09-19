@@ -22,4 +22,6 @@ allowing users to manage and search through their book collection seamlessly.
 	•	REST API Integration: Fetches book data using async thunks.
 
 🔨 Project Structure
+
+
 <img width="724" alt="image" src="https://github.com/user-attachments/assets/df8fdbc1-ee7c-4067-b4b6-ee84d192b3b6">
