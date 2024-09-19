@@ -1,4 +1,4 @@
-📚 Book Manager
+<img width="724" alt="image" src="https://github.com/user-attachments/assets/df8fdbc1-ee7c-4067-b4b6-ee84d192b3b6">📚 Book Manager
 
 A Book Manager application built with React Native and powered by Redux Toolkit for efficient state management. 
 This project demonstrates the usage of Redux for handling asynchronous requests, 
@@ -64,4 +64,3 @@ src/
 │   └── index.tsx                 # Theme setup (e.g., global styles)
 │
 ├── App.tsx                       # Entry point of the React Native app
-├── .eslintrc.js                  # ESLint configuration for code linting
