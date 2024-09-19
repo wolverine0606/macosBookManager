@@ -1,25 +1,25 @@
 📚 Book Manager
 
-A Book Manager application built with React Native and powered by Redux Toolkit for efficient state management. 
-This project demonstrates the usage of Redux for handling asynchronous requests, 
-entity management, and state slicing. The app fetches and displays a list of books, 
-allowing users to manage and search through their book collection seamlessly.
+A Book Manager application built with React Native, using Redux Toolkit for state management and styled with @shopify/restyle for a scalable and flexible design system. The app also leverages React Navigation’s Stack Navigation to handle screen transitions smoothly.
 
 🚀 Features
 
-	•	Book List Management: Fetches a list of books from an external source and displays them.
-	•	Redux Toolkit Integration: Uses Redux Toolkit’s createSlice and createEntityAdapter for optimal state management and scalability.
-	•	Entity Adapter: Handles entities efficiently with CRUD operations via createEntityAdapter.
-	•	Asynchronous Actions: Integrates Redux Thunks for handling async requests (e.g., fetching books).
-	•	Clean State Handling: Replaces the previous book list with new data to maintain an up-to-date state.
-	•	Search Functionality: Allows users to search through their book list using a query.
+	•	Book List Management: Fetches and displays a list of books from an external source.
+	•	Redux Toolkit Integration: Manages global state with createSlice and createEntityAdapter for better scalability.
+	•	Entity Adapter: Efficiently handles books’ state management with built-in CRUD operations.
+	•	Asynchronous Actions: Fetches books data using Redux thunks for handling asynchronous requests.
+	•	Clean UI: Styled using @shopify/restyle for theme-based, responsive, and consistent styling.
+	•	Stack Navigation: Enables seamless transitions between screens using React Navigation’s Stack Navigator.
+	•	Search Functionality: Allows users to search for books via a search bar at the top.
 
 🛠️ Tech Stack
 
-	•	React Native: Cross-platform mobile development framework.
-	•	Redux Toolkit: Simplified state management with slices, thunks, and entity adapters.
-	•	TypeScript: Typed superset of JavaScript for robust code.
-	•	REST API Integration: Fetches book data using async thunks.
+	•	React Native: Cross-platform mobile framework for building the app.
+	•	Redux Toolkit: Simplified state management with slices and thunks.
+	•	TypeScript: Adds static typing to JavaScript for better code robustness.
+	•	@shopify/restyle: A utility-first styling framework that promotes consistency and scalability with a design system.
+	•	React Navigation (Stack Navigation): Handles navigation and routing between screens.
+	•	REST API Integration: Fetches data from an external API.
 
 🔨 Project Structure
 
